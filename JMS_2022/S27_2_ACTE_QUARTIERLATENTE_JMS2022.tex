@@ -5,12 +5,7 @@
 %
 \documentclass[
   12pt,
-  french,
-  12pt,a4paper]{article}
-\title{Estimation en temps réel de la tendance-cycle : apport de l'utilisation des filtres asymétriques dans la détection des points de retournement}
-\author{Alain Quartier-la-Tente}
-\date{2022-03-17}
-
+  a4paper,french]{article}
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
 \usepackage{iftex}
@@ -81,10 +76,18 @@
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{5}
+\ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+\babelprovide[main,import]{french}
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
 %début contraintes ensae
 \usepackage{pdfpages, setspace, mathptmx} %times roman
 \usepackage{textpos}%pour textblock
-
 % Début JMS
 \makeatletter
 \def\@maketitle{%
@@ -224,21 +227,15 @@ frametitle={%
 \usepackage[normalem]{ulem}
 \usepackage{makecell}
 \usepackage{xcolor}
-\ifXeTeX
-  % Load polyglossia as late as possible: uses bidi with RTL langages (e.g. Hebrew, Arabic)
-  \usepackage{polyglossia}
-  \setmainlanguage[]{french}
-\else
-  \usepackage[main=french]{babel}
-% get rid of language-specific shorthands (see #6817):
-\let\LanguageShortHands\languageshorthands
-\def\languageshorthands#1{}
-\fi
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
 \usepackage[style=authoryear,]{biblatex}
 \addbibresource{biblio.bib}
+
+\title{Estimation en temps réel de la tendance-cycle : apport de l'utilisation des filtres asymétriques dans la détection des points de retournement}
+\author{Alain Quartier-la-Tente}
+\date{2022-05-31}
 
 \begin{document}
 \maketitle
@@ -265,7 +262,7 @@ X-13ARIMA, qui prolongent la série sur 1 an par un modèle ARIMA. Les
 prévisions étant des combinaisons linéaires du passé, cela revient en
 réalité à utiliser des moyennes mobiles asymétriques dont les
 coefficients sont optimisés par rapport à la prévision avec une longueur
-d'avance --- \emph{one-step ahead forecasting}.
+d'avance.
 
 La construction de moyennes mobiles asymétriques performantes en termes
 de fidélité (préservation du signal), de révision, de lissage et de
@@ -286,11 +283,14 @@ permet de reproduire l'ensemble des méthodes étudiées.
 
 La comparaison des méthodes sur séries simulées montre qu'il est
 important d'adapter la longueur du filtre à la variabilité de la série.
-Par ailleurs, même si certains filtres RKHS sont sujet à des problèmes
-d'optimisation et conduisent à des estimations intermédiaires
-erratiques, d'autres semblent donner des résultats satisfaisant en
-termes de délais dans la détection des points de retournement et de
-révisions. De plus, lorsque la longueur du filtre est adapté à la
+Même si certains filtres RKHS pourraient donner des résultats
+satisfaisant en termes de délais dans la détection des points de
+retournement, leur utilisation doit être limitées aux premières
+estimations de la tendances-cycles. Lorsque l'on se rapproche de
+l'estimation finale (i.e., lorsque beaucoup de points dans le futur sont
+connus), d'autres méthodes devraient être utilisées afin de limiter les
+révisions. Les filtres RKHS sont par ailleurs sujets à problèmes
+d'optimisation. Enfin, lorsque la longueur du filtre est adapté à la
 variabilité de la série, chercher à conserver des tendances polynomiales
 de degré supérieur à un semble introduire de la variance dans les
 estimations (et donc plus de révisions) sans gain significatif en termes
@@ -320,16 +320,16 @@ variability of the series, constraining asymmetric filters to preserve
 constant trends (and not necessarily polynomial ones) reduce revision
 error and time lag. Therefore, future studies on the subject can focus
 on these filters. Moreover, with RKHS filters some optimisation issues
-can occurs and they might lead to erratic estimation; however, some of
-them seem to produce satisfying results in terms of phase-shift and
-revisions.
+can occurs and they might lead to erratic estimation. They might be able
+to produce satisfying results in terms of phase-shift and revisions, but
+they should be avoid for the last estimates of the trend-cycle
+component: other methods should then be prefered to reduce revisions
+with the final estimates.
 
 All the methods are implemented in the \faIcon{r-project} package
 \texttt{rjdfilters} and the results can be easily reproduced. The
 programs used, and a web version of this report, are available at
 \url{https://github.com/AQLT/articles}.
-
-\newpage
 
 {
 \hypersetup{linkcolor=}
@@ -342,7 +342,7 @@ programs used, and a web version of this report, are available at
 
 L'analyse du cycle économique, et en particulier la détection rapide des points de retournement d'une série, est un sujet de première importance dans l'analyse de la conjoncture économique.
 Pour cela, les indicateurs économiques sont généralement corrigés des variations saisonnières.
-Toutefois, afin d'améliorer leur lisibilité, il peut être nécessaire d'effectuer un lissage supplémentaire afin de réduire le bruit qui altère l'analyse de la composante tendance-cycle.
+Toutefois, afin d'améliorer leur lisibilité, il peut être nécessaire d'effectuer un lissage supplémentaire afin de réduire le bruit, et ainsi analyser la composante tendance-cycle.
 Par construction, les méthodes d'extraction de tendance-cycle sont étroitement liées aux méthodes de désaisonnalisation puisqu'elles sont généralement appliquées sur des séries corrigées des variations saisonnières.
 
 Les moyennes mobiles, ou les filtres linéaires, sont omniprésents dans les méthodes d'extraction du cycle économique et d'ajustement saisonnier\footnote{
@@ -379,7 +379,7 @@ Ces méthodes supposent que toute série temporelle \(X_t\) peut se décomposer 
   Une composante jours ouvrables \(D_t\).
 \item
   Une composante tendance-cycle \(TC_t\) qui contient la tendance (qui représente les évolutions de long terme) et le cycle (qui représente les évolutions cycliques autour de la tendance).
-  La tendance et le cycle n'étant pas observés et étant difficiles à séparer, ils sont estimés de manière conjointes dans la désaisonnalisation.
+  Dans ce cas, la tendance et le cycle sont estimés conjointement : les deux composantes peuvent en effet être difficiles à séparer (comment différentier les cycles courts des cycles longs ?) et les méthodes étudiées sont souvent appliquées sur des courtes (les cycles longs sont alors difficilement estimables).
 \item
   Une composante irrégulière \(I_t\) qui contient toutes les autres fluctuations.
 \end{enumerate}
@@ -460,20 +460,20 @@ La fonction \(\Gamma_\theta(\omega)=\sum_{k=-p}^{+f} \theta_k e^{-i \omega k}\) 
   La fonction de transfert peut être définie de manière équivalente par \(\Gamma_\theta(\omega)=\sum_{k=-p}^{+f} \theta_k e^{i \omega k}\) ou \(\Gamma_\theta(\omega)=\sum_{k=-p}^{+f} \theta_k e^{2\pi i \omega k}\).}.
 Elle peut être réécrite en :
 \[
-\Gamma_\theta(\omega) = G_\theta(\omega)\e^{-i\Phi_\theta(\omega)},
+\Gamma_\theta(\omega) = \rho_\theta(\omega)\e^{-i\varphi_\theta(\omega)},
 \]
-où \(G_\theta(\omega)=\lvert\Gamma_\theta(\omega)\rvert\) est la fonction de \emph{gain} ou \emph{d'amplitude} et \(\Phi_\theta(\omega)\) est le \emph{déphasage} (\emph{phase shift} ou \emph{time shift})\footnote{
-  Cette fonction est parfois définie comme \(\phi_\theta(\omega)=\frac{\Phi_\theta(\omega)}{\omega}\) pour mesurer le déphasage en termes de période.}.
+où \(\rho_\theta(\omega)=G_\theta(\omega)=\lvert\Gamma_\theta(\omega)\rvert\) est la fonction de \emph{gain} ou \emph{d'amplitude} et \(\varphi_\theta(\omega)\) est le \emph{déphasage} (\emph{phase shift} ou \emph{time shift})\footnote{
+  Cette fonction est parfois définie comme \(\phi_\theta(\omega)=\frac{\varphi_\theta(\omega)}{\omega}\) pour mesurer le déphasage en termes de période.}.
 Pour tous les filtres symétriques on a \(\Phi_\theta(\omega)\equiv 0 \;(modulo\;{\pi})\).
 
 En somme, appliquer une moyenne mobile à une série harmonique la modifie de deux façons :
 
 \begin{itemize}
 \item
-  en la multipliant par un coefficient égal à \(G_{\theta}\left(\omega\right)\) (gain) ;
+  en la multipliant par un coefficient égal à \(\rho_{\theta}\left(\omega\right)\) (gain) ;
 \item
-  en la « décalant » dans le temps de \(\Phi_\theta(\omega)/\omega\), ce qui a un impact sur la détection des points de retournement (déphasage) \footnote{
-    Lorsque \(\Phi_\theta(\omega)/\omega>0\) le déphasage est positif : le point de retournement est détecté avec retard.}.
+  en la « décalant » dans le temps de \(\varphi_\theta(\omega)/\omega\), ce qui a un impact sur la détection des points de retournement (déphasage) \footnote{
+    Lorsque \(\varphi_\theta(\omega)/\omega>0\) le déphasage est positif : le point de retournement est détecté avec retard.}.
 \end{itemize}
 
 \hypertarget{propriuxe9tuxe9s-souhaitables-dune-moyenne-mobile}{%
@@ -577,7 +577,7 @@ Cela signifie, que pour tout \(q\) on a :
 \]
 Ce qui est équivalent à :
 \[
-\forall q, \quad \sum_{i=1}^h (v_i- w_i^q) y_i^**
+\forall q, \quad \sum_{i=1}^h (v_i- w_i^q) y_i^*
 =\sum_{i=-h}^0 (w_i^q-v_i)y_i.
 \]
 En somme, matriciellement, cela revient donc à résoudre :
@@ -659,11 +659,11 @@ Pour établir une théorie générale englobant les principaux filtres linéaire
 En changeant légèrement les notations utilisées par les auteurs afin d'avoir une formulation plus générale, ces deux critères peuvent s'écrire :
 \begin{align}
 I(\theta,q,y_t,u_t)&=\E{(\Delta^{q}M_\theta y_t-u_t)^{2}} \label{eq:theoriegen1} \\
-J(\theta,f, \omega_1,\omega_2)&=\int_{\omega_1}^{\omega_2} f\left[\phi_\theta(\omega), \varphi_\theta (\omega), \omega\right] \ud \omega \label{eq:theoriegen2}
+J(\theta,f, \omega_1,\omega_2)&=\int_{\omega_1}^{\omega_2} f\left[\rho_\theta(\omega), \varphi_\theta (\omega), \omega\right] \ud \omega \label{eq:theoriegen2}
 \end{align}
 où \(y_t\) est la série étudiée, \(u_t\) une série de référence et \(\Delta\) est l'opérateur différence (\(\Delta y_t=y_t-y_{t-1}\) et \(\Delta^q=\underbrace{\Delta \circ \dots \circ \Delta}_{q\text{ fois}}\) pour \(q\in\N\)).
-Dans la majorité des cas, la fonction \(f\) ne dépendra que de la fonction de gain, \(\phi_\theta\), et de la fonction de déphasage, \(\varphi_\theta\).
-Dans ce cas, par simplification on écrira \(f\left[\phi_\theta(\omega), \varphi_\theta (\omega), \omega\right] = f\left[\phi_\theta(\omega), \varphi_\theta (\omega)\right]\).
+Dans la majorité des cas, la fonction \(f\) ne dépendra que de la fonction de gain, \(\rho_\theta\), et de la fonction de déphasage, \(\varphi_\theta\).
+Dans ce cas, par simplification on écrira \(f\left[\rho_\theta(\omega), \varphi_\theta (\omega), \omega\right] = f\left[\rho_\theta(\omega), \varphi_\theta (\omega)\right]\).
 
 Comme montré dans cette étude, la majorité des filtres linéaires peut s'obtenir par une minimisation d'une somme pondérée de ces critères, sous contrainte linéaire sur les coefficients~:
 
@@ -724,7 +724,8 @@ En somme, l'approche FST consiste à minimiser une somme pondérée de ces trois
 \begin{equation}
 \begin{cases}
 \underset{\theta}{\min} &
-\alpha F_g(\theta)+\beta S_g(\theta)+\gamma T_g(\theta) = \theta'(F+S+T)\theta\\
+\alpha F_g(\theta)+\beta S_g(\theta)+\gamma T_g(\theta) = 
+\theta'(\alpha F+\beta S+ \gamma T)\theta\\
 s.t. & C\theta=a
 \end{cases}. \label{eq:gugemmos}
 \end{equation}
@@ -906,7 +907,7 @@ La régression non paramétrique consiste à supposer qu'il existe une fonction 
 D'après le théorème de Taylor, pour tout point \(x_0\), si \(\mu\) est différentiable \(d\) fois, alors :
 \[
 \forall x \::\:\mu(x) = \mu(x_0) + \mu'(x_0)(x-x_0)+\dots +
-\frac{\mu^{(d)}(x_0)}{d!}(x-a)^d+R_d(x),
+\frac{\mu^{(d)}(x_0)}{d!}(x-x_0)^d+R_d(x),
 \]
 où \(R_d\) est un terme résiduel négligeable au voisinage de \(x_0\).
 Dans un voisinage \(h(x_0)\) autour de \(x_0\), \(\mu\) peut être approchée par un polynôme de degré \(d\).
@@ -1151,7 +1152,8 @@ Comme mentionné dans la partie \ref{subec:mmetprev}, pour l'estimation en temps
 \textcite{proietti2008} montrent que les deux premières approches sont équivalentes lorsque les prévisions sont faites par extrapolation polynomiale de degré \(d\).
 Elles sont également équivalentes à la troisième approche sous les mêmes contraintes que celles du filtre symétrique.
 Cette méthode est appelée \emph{direct asymmetric filter} (DAF).
-Même si les estimations sont sans biais, c'est au coût d'une plus grande variance dans les estimations.
+C'est cette méthode qui est utilisée pour l'estimation en temps réel dans la méthode de désaisonnalisation STL (\emph{Seasonal-Trend decomposition based on Loess}, voir \textcite{cleveland90}).
+Même si les estimations des filtres DAF sont sans biais, c'est au coût d'une plus grande variance dans les estimations.
 
 Pour résoudre le problème de la variance des estimations des filtres temps réel, \textcite{proietti2008} proposent une méthode générale pour construire les filtres asymétriques qui permet de faire un compromis biais-variance.
 Il s'agit d'une généralisation des filtres asymétriques de \textcite{musgrave1964set} (utilisés dans l'algorithme de désaisonnalisation X-13ARIMA).
@@ -1835,9 +1837,12 @@ Du fait du fort degré de liberté de l'approche FST (dans le choix des différe
   Il est en effet difficile de comparer proprement les résultats entre les différents noyaux car le filtre symétrique n'est pas le même. Cela a pour conséquence que des points de retournement peuvent être détectés. Par exemple, pour le filtre LC, sur les trois séries ayant une variabilité moyenne, seul 1 point de retournement est correctement détecté par l'ensemble des noyaux.
   Toutefois, une première analyse des résultats montrent que les différents noyaux ont des performances proches en termes de déphasage et de révisions, sauf le noyau uniforme qui produit de moins bons résultats.} et les filtres RKHS \(b_{q,\Gamma}\), \(b_{q,G}\) et \(b_{q,\varphi}\).
 
-En termes de déphasage dans la détection des points de retournement, c'est le filtre \(b_{q,G}\) qui semble donner les meilleurs résultats quelle que soit la variabilité de la série (figure \ref{fig:graphstpsimul}), avec des performances légèrement meilleurs que celles obtenues en prolongeant la série grâce à un modèle ARIMA.
-Étonnement, c'est le filtre \(b_{q,\varphi}\) qui minimise le déphasage qui donne les moins bons résultats. Cela peut s'expliquer par le fait que la courbe des coefficients des moyennes mobiles asymétriques sont assez éloignées des coefficients du filtre symétrique : il y a donc potentiellement beaucoup de révisions dans la détection des points de retournement.
-Dans les filtres polynomiaux locaux, les filtres LC (filtres de Musgrave) semblent donner les meilleurs résultats lorsque la variabilité est moyenne ou forte (avec des résultats proches du filtre QL dans ce second pas) mais de moins bons résultats lorsque la variabilité est faible.
+En termes de déphasage dans la détection des points de retournement, c'est le filtre LC qui semble donner les meilleurs résultats lorsque la variabilité de la série est moyenne ou forte (figure \ref{fig:graphstpsimul}).
+Les performances sont relativement proches de celles obtenues en prolongeant la série grâce à un modèle ARIMA.
+Toutefois, lorsque la variabilité est faible, ils semblent donner de moins bons résultats.
+Étonnement, c'est le filtre \(b_{q,\varphi}\) qui minimise le déphasage qui donne les moins bons résultats. Les autres filtres RKHS ont également une grande variabilité en termes de déphasage.
+Cela peut s'expliquer par le fait que la courbe des coefficients des moyennes mobiles asymétriques sont assez éloignées des coefficients du filtre symétrique : il y a donc potentiellement beaucoup de révisions dans la détection des points de retournement.
+En effet, lorsque le déphasage est défini comme la première date à laquelle le bon point de retournement est détecté, c'est le filtre \(b_{q,G}\) qui donne les meilleurs résultats.
 
 \begin{figure}
 
@@ -1997,7 +2002,7 @@ Pour l'approche FST, on ne retient que les filtres obtenus avec les poids \(\beg
 
 Même si presque toutes les méthodes ont un déphasage d'au plus 3 mois sur ce point de retournement, les estimations intermédiaires différent grandement.
 Il y a par exemple nettement plus de variabilités dans les estimations en temps réel pour les méthode QL, CQ et DAF et les filtres FST (figures \ref{fig:retailxlp}, \ref{fig:retailxfst1} et \ref{fig:retailxfst2}), avec des estimations intermédiaires qui semblent peu plausibles (notamment pour la première estimation du mois d'avril 2020). Les premières estimations avec le filtre LC ne capte pas la remontée en mai et juin 2020 : cela peut provenir du fait qu'en fin de série, la tendance modélisée est linéaire.
-Concernant les filtres RKHS, les estimations intermédiaires du filtre \(b_{q,\varphi}\) semblent très erratiques, ce qui s'explique par le fait que les moyennes mobiles asymétriques utilisées lorsque l'on se rapproche du cas symétrique sont éloignées de la moyenne mobile symétrique d'Henderson.
+Concernant les filtres RKHS, les estimations intermédiaires du filtre \(b_{q,\varphi}\) semblent très erratiques, ce qui s'explique, encore une fois, par le fait que les moyennes mobiles asymétriques utilisées lorsque l'on se rapproche du cas symétrique sont éloignées de la moyenne mobile symétrique d'Henderson.
 En revanche, les filtres \(b_{q,\Gamma}\) et \(b_{q,G}\) donnent des estimations intermédiaires proches de l'estimation finale, tout en minimisant le déphasage.
 
 La qualité des estimations intermédiaires peut également être analysée grâces aux prévisions implicites des différentes méthodes. Pour rappel, il s'agit des prévisions de la série brute qui, en appliquant le filtre symétrique de Henderson sur la série prolongée, donne les mêmes estimations que les moyennes mobiles asymétriques. L'annexe \ref{an-implicitforecasts} rassemble les différentes prévisions implicites des filtres étudiés dans cette section.
@@ -2020,15 +2025,16 @@ Celui-ci permet d'utiliser plusieurs outils, comme la construction des prévisio
 
 La comparaison des différentes méthodes, bien que perfectible, permet de tirer quelques enseignements pour la construction de ces moyennes mobiles.
 Premièrement, en fin de période, chercher à conserver des tendances polynomiales de degré supérieur à un (filtres QL, CQ et DAF et certains filtres FST) semble introduire de la variance dans les estimations (et donc plus de révisions) sans gain significatif en termes de détection de point de retournement.
+La méthode de désaisonnalisation STL utilisant les filtres DAF en fin de période, elle pourrait facilement être améliorée.
 Il faut en revanche que la longueur du filtre utilisé soit adapté à la variabilité de la série : si le filtre utilisé est trop long (c'est-à-dire si la variabilité de la série est «~moyenne~»), conserver des tendances polynomiale de degré au plus 1 (méthode LC) produit de moins bons résultats en termes de détection des points de retournement.
 
-Deuxièmement, la théorie des RKHS semble permettre la construction de filtres qui pourraient donner un bon compromis entre minimisation du déphasage et révisions (filtre \(b_{q,G}\)).
-Toutefois, leur calibration peut être sujette à des problèmes d'optimisation et conduire à des estimations intermédiaires erratiques (filtre \(b_{q,\varphi}\)).
+Deuxièmement, plus d'investigations devraient être faites sur la théorie des RKHS qui pourrait donner un bon compromis entre minimisation du déphasage et révisions.
+En revanche, ils devraient uniquement être utilisées pour les premières estimations de la tendance-cycle (lorsque peu de points dans le futur sont connus), lorsqu'au moins 3 points dans le futur sont connus, un filtre simple (comme le filtre LC) peut être utiliser pour limiter les révisions avec le filtre final.
+Par ailleurs, leur calibration peut être sujette à des problèmes d'optimisation (filtre \(b_{q,\varphi}\)).
 
 Enfin, la moins bonne performance apparente de certains filtres basés sur l'approche FST ou les RKHS pourrait provenir de l'utilisation de filtres sous-optimaux lorsque que l'on s'approche du cas d'utilisation du filtre symétrique.
 Sur l'approche FST par exemple, rien ne justifie que l'on devrait utiliser les mêmes poids entre fidélité, lissage et temporalité pour la construction de toutes les moyennes mobiles asymétriques.
-Plus d'études devraient être faites pour savoir si, pour la construction des filtres asymétriques minimisant le déphasage, on pourrait se concentrer uniquement sur les ceux utilisés lorsque peu d'observations futures sont disponibles.
-Cela impliquerait notamment de revoir la méthodologie et les indicateurs utilisés.
+Chaque moyenne mobile asymétrique devraient ainsi être construite de manière indépendante
 
 Cette étude pourrait être étendue de plusieurs manières.
 

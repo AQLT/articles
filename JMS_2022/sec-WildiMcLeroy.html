@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapitre 4 Filtres dépendant des données : trilemme ATS | Estimation en temps réel de la tendance-cycle : apport de l’utilisation des filtres asymétriques dans la détection des points de retournement</title>
   <meta name="description" content="Journées de méthodologie statistique de l’Insee (JMS) / Mars 2022 / PARIS" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapitre 4 Filtres dépendant des données : trilemme ATS | Estimation en temps réel de la tendance-cycle : apport de l’utilisation des filtres asymétriques dans la détection des points de retournement" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="Journées de méthodologie statistique de l’Insee (JMS) / Mars 2022 / PARIS" />
   
@@ -24,7 +23,7 @@
 <meta name="author" content="Alain Quartier-la-Tente" />
 
 
-<meta name="date" content="2022-03-17" />
+<meta name="date" content="2022-05-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +32,6 @@
   
 <link rel="prev" href="sec-theoriegen.html"/>
 <link rel="next" href="sec-nonparamreg.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <link href="libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
@@ -96,7 +95,7 @@ div.csl-indent {
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">JMS 2022</a></li>
+<li><a href="./">JMS 2022 AQLT</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Résumé</a></li>
@@ -260,9 +259,9 @@ div.csl-indent {
     </div>
     </body>
             
-<div id="sec-WildiMcLeroy" class="section level1" number="4">
-<h1><span class="header-section-number">Chapitre 4</span> Filtres dépendant des données : trilemme ATS</h1>
-<p><span class="citation"><a href="#ref-trilemmaWMR2019" role="doc-biblioref">Wildi et McElroy</a> (<a href="#ref-trilemmaWMR2019" role="doc-biblioref">2019</a>)</span> proposent une approche dépendante des données (<em>data-dependent</em>) pour calculer des filtres linéaires.
+<div id="sec-WildiMcLeroy" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapitre 4</span> Filtres dépendant des données : trilemme ATS<a href="sec-WildiMcLeroy.html#sec-WildiMcLeroy" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><span class="citation">Wildi et McElroy (<a href="#ref-trilemmaWMR2019" role="doc-biblioref">2019</a>)</span> proposent une approche dépendante des données (<em>data-dependent</em>) pour calculer des filtres linéaires.
 Ils décomposent l’erreur quadratique moyenne de révision en un trilemme de trois quantités appelées <em>accuracy</em> (précision), <em>timeliness</em> (temporalité) et <em>smoothness</em> (lissage), d’où son nom <em>ATS-trilemna</em>.</p>
 <p>Soient :</p>
 <ul>
@@ -280,12 +279,12 @@ Cette approche peut être approfondie en décomposant l’erreur de quadratique 
 \E{(TC_{t}-\widehat{TC}_{t})^{2}}=\frac{1}{2\pi}\int_{-\pi}^{\pi}\left|\Gamma_s(\omega)-{\Gamma_\theta}(\omega)\right|^{2}h(\omega)\ud\omega=\frac{1}{2\pi}\times2\times\int_{0}^{\pi}\left|\Gamma_s(\omega)-{\Gamma_\theta}(\omega)\right|^{2}h(\omega)\ud\omega
 \tag{4.1}
 \end{equation}\]</span>
-Cette égalité peut également se généraliser aux processus intégrés non-stationnaires (par exemple en imposant une cointégration entre les deux signaux et en utilisant le pseudo-spectre, voir <span class="citation"><a href="#ref-optimrtfWMR2013" role="doc-biblioref">Wildi et McElroy</a> (<a href="#ref-optimrtfWMR2013" role="doc-biblioref">2013</a>)</span>).</p>
+Cette égalité peut également se généraliser aux processus intégrés non-stationnaires (par exemple en imposant une cointégration entre les deux signaux et en utilisant le pseudo-spectre, voir <span class="citation">Wildi et McElroy (<a href="#ref-optimrtfWMR2013" role="doc-biblioref">2013</a>)</span>).</p>
 <p>On a :
 <span class="math display" id="eq:msedecomp">\[\begin{align}
 \left|\Gamma_s(\omega)-\Gamma_\theta(\omega)\right|^{2} &amp; =\rho_s(\omega)^{2}+\rho_\theta(\omega)^{2}+2\rho_s(\omega)\rho_\theta(\omega)\left(1-\cos(\varphi_s(\omega)-\varphi_\theta(\omega)\right) \nonumber\\
- &amp; =\left(\rho_s(\omega)-\rho_\theta(\omega)\right)^{2}+4\rho_s(\omega)\rho_\theta(\omega)\sin^{2}\left(\frac{\varphi_s(\omega)-\varphi_\theta(\omega)}{2}\right)
- \tag{4.2}
+&amp; =\left(\rho_s(\omega)-\rho_\theta(\omega)\right)^{2}+4\rho_s(\omega)\rho_\theta(\omega)\sin^{2}\left(\frac{\varphi_s(\omega)-\varphi_\theta(\omega)}{2}\right)
+\tag{4.2}
 \end{align}\]</span></p>
 <p>L’intervalle <span class="math inline">\([0,\pi]\)</span> peut être coupé en deux : une partie dite <em>pass-band</em> <span class="math inline">\([0,\omega_1]\)</span> (l’intervalle de fréquences qui contient le signal cible) et une partie dite <em>stop-band</em> <span class="math inline">\([\omega_1,\pi]\)</span> (l’intervalle de fréquences associé aux résidus).</p>
 <p>L’erreur de l’équation <a href="sec-WildiMcLeroy.html#eq:msedef">(4.1)</a> peut être décomposée en 4 quantités :
@@ -296,7 +295,7 @@ Smoothness =S_w(\theta)&amp;= 2\int_{\omega_1}^\pi\left(\rho_s(\omega)-\rho_\the
 Residual =R_w(\theta)&amp;= 8\int_{\omega_1}^\pi\rho_s(\omega)\rho_\theta(\omega)\sin^{2}\left(\frac{\varphi_\theta(\omega)}{2}\right)h(\omega)\ud\omega\\
 \end{align*}\]</span></p>
 <div class="remarque">
-<p>Afin d’avoir des définitions cohérentes entre les différentes sections, les formules des quatre critères ont été légèrement modifiées par rapport à ceux définis par <span class="citation"><a href="#ref-trilemmaWMR2019" role="doc-biblioref">Wildi et McElroy</a> (<a href="#ref-trilemmaWMR2019" role="doc-biblioref">2019</a>)</span> :</p>
+<p>Afin d’avoir des définitions cohérentes entre les différentes sections, les formules des quatre critères ont été légèrement modifiées par rapport à ceux définis par <span class="citation">Wildi et McElroy (<a href="#ref-trilemmaWMR2019" role="doc-biblioref">2019</a>)</span> :</p>
 <ul>
 <li><p>dans cette étude, l’intervalle d’intégration est <span class="math inline">\([0,\pi]\)</span> plutôt que <span class="math inline">\([-\pi,\pi]\)</span> (toutes les fonctions étant paires cela revient à multiplier par 2 toutes les intégrales) ;</p></li>
 <li><p>dans l’article originel, l’intervalle pass-band dépend de la fonction de gain du filtre symétrique (pass-band<span class="math inline">\(=\{\omega |\rho_s(\omega)\geq 0,5\}\)</span>) : cela correspond donc à l’intervalle contenant les fréquences conservées sans trop de distorsion par le filtre symétrique.
@@ -309,7 +308,7 @@ C’est pourquoi, pour la construction de filtres linéaires les auteurs suggèr
 <span class="math display">\[
 \mathcal{M}(\vartheta_{1},\vartheta_{2})=\vartheta_{1}T_w(\theta)+\vartheta_{2}S_w(\theta)+(1-\vartheta_{1}-\vartheta_{2})A_w(\theta).
 \]</span>
-Comme le montrent <span class="citation"><a href="#ref-tuckerwildi2020" role="doc-biblioref">McElroy et Wildi</a> (<a href="#ref-tuckerwildi2020" role="doc-biblioref">2020</a>)</span>, cette méthode peut également être étendue au cas multivarié, ce qui permet de prendre en compte les corrélations entre les composantes de différentes séries.</p>
+Comme le montrent <span class="citation">McElroy et Wildi (<a href="#ref-tuckerwildi2020" role="doc-biblioref">2020</a>)</span>, cette méthode peut également être étendue au cas multivarié, ce qui permet de prendre en compte les corrélations entre les composantes de différentes séries.</p>
 <p>Un des inconvénients de cette méthode est qu’il n’y a pas de garantie d’unicité de la solution.
 En revanche, son avantage par rapport à la méthode FST (section <a href="sec-theoriegen.html#subsec-GuggemosEtAl">3.2</a>) est que la décomposition de l’erreur quadratique moyenne permet de normaliser les différents indicateurs, et les coefficients <span class="math inline">\(\vartheta_{1}\)</span>, <span class="math inline">\(\vartheta_{2}\)</span> et <span class="math inline">\(1-\vartheta_{1}-\vartheta_{2}\)</span> peuvent être comparés entre eux.</p>
 <p>Les quatre critères <span class="math inline">\(A_w\)</span>, <span class="math inline">\(T_w\)</span>, <span class="math inline">\(S_w\)</span> et <span class="math inline">\(R_w\)</span> étant des cas particuliers du critère <span class="math inline">\(J\)</span> défini dans l’équation <a href="sec-theoriegen.html#eq:theoriegen1">(3.1)</a>, cette méthode s’inscrit dans le cadre de la théorie générale définie dans la section <a href="sec-theoriegen.html#subsec-theoriegen">3.1</a>.
@@ -333,7 +332,7 @@ Pour avoir des critères qui ne dépendent pas des données, une idée serait de
 C’est ce qui est implémenté dans la fonction <code>rjdfilters::dfa_filter()</code>.</p>
 <div class="summary_box">
 <div class="title">
-<p>ATS-trilemna - <span class="citation"><a href="#ref-trilemmaWMR2019" role="doc-biblioref">Wildi et McElroy</a> (<a href="#ref-trilemmaWMR2019" role="doc-biblioref">2019</a>)</span></p>
+<p>ATS-trilemna - <span class="citation">Wildi et McElroy (<a href="#ref-trilemmaWMR2019" role="doc-biblioref">2019</a>)</span></p>
 </div>
 <p><strong>Avantages</strong> :</p>
 <ul>
@@ -349,7 +348,7 @@ C’est ce qui est implémenté dans la fonction <code>rjdfilters::dfa_filter()<
 </div>
 
 </div>
-<h3>Références</h3>
+<h3>Références<a href="références.html#références" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-tuckerwildi2020" class="csl-entry">
 McElroy, Tucker, et Marc Wildi. 2020. <span>« <span>The Multivariate Linear Prediction Problem: Model-Based and Direct Filtering Solutions</span> »</span>. <em>Econometrics and Statistics</em> 14 (C): 112‑30. <a href="https://doi.org/10.1016/j.ecosta.2019.12.">https://doi.org/10.1016/j.ecosta.2019.12.</a>
@@ -419,7 +418,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["AQLT_JMS_2022.pdf", "AQLT_JMS_2022.docx", "AQLT_JMS_2022.tex"],
+"download": ["S27_2_ACTE_QUARTIERLATENTE_JMS2022.pdf", "S27_2_ACTE_QUARTIERLATENTE_JMS2022.docx", "S27_2_ACTE_QUARTIERLATENTE_JMS2022.tex"],
 "search": {
 "engine": "fuse",
 "options": null

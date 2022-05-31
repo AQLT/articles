@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapitre 1 De la désaisonnalisation à l’estimation tendance-cycle | Estimation en temps réel de la tendance-cycle : apport de l’utilisation des filtres asymétriques dans la détection des points de retournement</title>
   <meta name="description" content="Journées de méthodologie statistique de l’Insee (JMS) / Mars 2022 / PARIS" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapitre 1 De la désaisonnalisation à l’estimation tendance-cycle | Estimation en temps réel de la tendance-cycle : apport de l’utilisation des filtres asymétriques dans la détection des points de retournement" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="Journées de méthodologie statistique de l’Insee (JMS) / Mars 2022 / PARIS" />
   
@@ -24,7 +23,7 @@
 <meta name="author" content="Alain Quartier-la-Tente" />
 
 
-<meta name="date" content="2022-03-17" />
+<meta name="date" content="2022-05-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +32,6 @@
   
 <link rel="prev" href="introduction.html"/>
 <link rel="next" href="sec-propMM.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <link href="libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
@@ -96,7 +95,7 @@ div.csl-indent {
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">JMS 2022</a></li>
+<li><a href="./">JMS 2022 AQLT</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Résumé</a></li>
@@ -260,17 +259,17 @@ div.csl-indent {
     </div>
     </body>
             
-<div id="sec-SAtoTCE" class="section level1" number="1">
-<h1><span class="header-section-number">Chapitre 1</span> De la désaisonnalisation à l’estimation tendance-cycle</h1>
+<div id="sec-SAtoTCE" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">Chapitre 1</span> De la désaisonnalisation à l’estimation tendance-cycle<a href="sec-SAtoTCE.html#sec-SAtoTCE" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>La plupart des indicateurs macroéconomiques (PIB, production, consommation, etc.) sont affectés par des effets saisonniers et des effets jours ouvrables qui perturbent l’analyse des évolutions infra-annuelles et les comparaisons spatiales.
 C’est pourquoi les séries chronologiques sont généralement corrigées des variations saisonnières et des jours ouvrables, la <em>désaisonnalisation</em> étant le processus consistant à supprimer leurs effets.</p>
-<p>Pour effectuer la désaisonnalisation, les méthodes de désaisonnalisation les plus populaires sont TRAMO-SEATS, une méthode paramétrique basée sur les modèles ARIMA (voir par exemple <span class="citation"><a href="#ref-maravall2004program" role="doc-biblioref">Maravall et Caporello</a> (<a href="#ref-maravall2004program" role="doc-biblioref">2004</a>)</span>), et X-13ARIMA-SEATS, une méthode non-paramétrique basée sur les moyennes mobiles (voir par exemple <span class="citation"><a href="#ref-ladiray2011seasonal" role="doc-biblioref">Ladiray et Quenneville</a> (<a href="#ref-ladiray2011seasonal" role="doc-biblioref">2011</a>)</span>).
+<p>Pour effectuer la désaisonnalisation, les méthodes de désaisonnalisation les plus populaires sont TRAMO-SEATS, une méthode paramétrique basée sur les modèles ARIMA (voir par exemple <span class="citation">Maravall et Caporello (<a href="#ref-maravall2004program" role="doc-biblioref">2004</a>)</span>), et X-13ARIMA-SEATS, une méthode non-paramétrique basée sur les moyennes mobiles (voir par exemple <span class="citation">Ladiray et Quenneville (<a href="#ref-ladiray2011seasonal" role="doc-biblioref">2011</a>)</span>).
 Ces méthodes supposent que toute série temporelle <span class="math inline">\(X_t\)</span> peut se décomposer en quatre composantes :</p>
 <ol style="list-style-type: decimal">
 <li><p>Une composante saisonnière <span class="math inline">\(S_t\)</span>.</p></li>
 <li><p>Une composante jours ouvrables <span class="math inline">\(D_t\)</span>.</p></li>
 <li><p>Une composante tendance-cycle <span class="math inline">\(TC_t\)</span> qui contient la tendance (qui représente les évolutions de long terme) et le cycle (qui représente les évolutions cycliques autour de la tendance).
-La tendance et le cycle n’étant pas observés et étant difficiles à séparer, ils sont estimés de manière conjointes dans la désaisonnalisation.</p></li>
+Dans ce cas, la tendance et le cycle sont estimés conjointement : les deux composantes peuvent en effet être difficiles à séparer (comment différentier les cycles courts des cycles longs ?) et les méthodes étudiées sont souvent appliquées sur des courtes (les cycles longs sont alors difficilement estimables).</p></li>
 <li><p>Une composante irrégulière <span class="math inline">\(I_t\)</span> qui contient toutes les autres fluctuations.</p></li>
 </ol>
 <p>Toutes ces composantes étant inobservées, l’estimation de l’une dépend de l’estimation des autres.
@@ -279,37 +278,37 @@ Ce lien explique également que toutes les méthodes utilisées dans ce rapport 
 Une interface <i class="fab fa-r-project"></i> à l’ensemble des a été développée autour des méthodes présentées dans cette étude, grâce au <em>package</em> <code>rjdfilters</code><a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>.</p>
 <p>Les filtres linéaires (ou moyennes mobiles) sont omniprésents dans la désaisonnalisation et l’estimation des différentes composantes.
 Au centre de la série, des filtres dits symétriques sont appliqués (pour estimer une composante à la date <span class="math inline">\(t\)</span>, on utilise autant de points après <span class="math inline">\(t\)</span> qu’avant <span class="math inline">\(t\)</span>).
-Pour extraire la tendance-cycle, le filtre symétrique le plus connu est celui de <span class="citation"><a href="#ref-henderson1916note" role="doc-biblioref">Henderson</a> (<a href="#ref-henderson1916note" role="doc-biblioref">1916</a>)</span>, notamment utilisé dans l’algorithme X-13ARIMA.
+Pour extraire la tendance-cycle, le filtre symétrique le plus connu est celui de <span class="citation">Henderson (<a href="#ref-henderson1916note" role="doc-biblioref">1916</a>)</span>, notamment utilisé dans l’algorithme X-13ARIMA.
 Cependant, en raison du manque d’observations futures, les estimations en temps réel doivent s’appuyer sur des moyennes mobiles asymétriques.
 Les moyennes mobiles asymétriques classiques minimisent les erreurs de révision mais introduisent des retards dans la détection des points de retournement (appelé déphasage, voir section <a href="sec-propMM.html#sec-propMM">2</a>).</p>
 <p>Dans la littérature, différentes approches ont été envisagées pour l’extraction de tendance-cycle en temps réel<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>.
 Parmi les plus récentes, on peut citer :</p>
 <ul>
 <li><p>Les <em>Model-Based Approach</em> — approches basées sur les modèles — supposent la spécification d’un modèle stochastique pour la tendance (modèle ARIMA, modèle d’espace d’état, etc.) et les estimations sont obtenues en minimisant une fonction de pénalité, généralement l’erreur quadratique moyenne.
-C’est par exemple le cas du filtre de Kalman, du filtre de Wiener-Kolmogorov (utilisé dans TRAMO-SEATS) et de l’Approche par Filtre Direct de <span class="citation"><a href="#ref-trilemmaWMR2019" role="doc-biblioref">Wildi et McElroy</a> (<a href="#ref-trilemmaWMR2019" role="doc-biblioref">2019</a>)</span> (section <a href="sec-WildiMcLeroy.html#sec-WildiMcLeroy">4</a>).</p></li>
+C’est par exemple le cas du filtre de Kalman, du filtre de Wiener-Kolmogorov (utilisé dans TRAMO-SEATS) et de l’Approche par Filtre Direct de <span class="citation">Wildi et McElroy (<a href="#ref-trilemmaWMR2019" role="doc-biblioref">2019</a>)</span> (section <a href="sec-WildiMcLeroy.html#sec-WildiMcLeroy">4</a>).</p></li>
 <li><p>Les méthodes d’extraction non paramétriques ne supposent pas que la structure d’un modèle est fixe et peuvent être facilement appliquées à n’importe quelle série temporelle.
-C’est par exemple le cas des filtres d’Henderson et de <span class="citation"><a href="#ref-musgrave1964set" role="doc-biblioref">Musgrave</a> (<a href="#ref-musgrave1964set" role="doc-biblioref">1964</a>)</span> (utilisés dans X-13ARIMA).
-Les méthodes classiques peuvent être vues comme des régressions polynomiales locales, approche généralisée par <span class="citation"><a href="#ref-proietti2008" role="doc-biblioref">Proietti et Luati</a> (<a href="#ref-proietti2008" role="doc-biblioref">2008</a>)</span> (section <a href="sec-nonparamreg.html#sec-proietti">5.1</a>).
+C’est par exemple le cas des filtres d’Henderson et de <span class="citation">Musgrave (<a href="#ref-musgrave1964set" role="doc-biblioref">1964</a>)</span> (utilisés dans X-13ARIMA).
+Les méthodes classiques peuvent être vues comme des régressions polynomiales locales, approche généralisée par <span class="citation">Proietti et Luati (<a href="#ref-proietti2008" role="doc-biblioref">2008</a>)</span> (section <a href="sec-nonparamreg.html#sec-proietti">5.1</a>).
 Les estimateurs non paramétriques peuvent également être reproduits en exploitant la méthodologie de l’espace de Hilbert du noyau reproducteur (RKHS), comme cela est fait par
-<span class="citation"><a href="#ref-dagumbianconcini2008" role="doc-biblioref">Dagum et Bianconcini</a> (<a href="#ref-dagumbianconcini2008" role="doc-biblioref">2008</a>)</span> (section <a href="sec-nonparamreg.html#sec-rkhs">5.4</a>).</p></li>
+<span class="citation">Dagum et Bianconcini (<a href="#ref-dagumbianconcini2008" role="doc-biblioref">2008</a>)</span> (section <a href="sec-nonparamreg.html#sec-rkhs">5.4</a>).</p></li>
 </ul>
 <p>Bien que ces auteurs aient proposé des approches générales pour construire des filtres linéaires, ils ne font référence qu’aux méthodes les plus classiques (Henderson, Musgrave, Hodrick-Prescott, etc.) sans faire le lien avec les autres méthodes récentes.
 Dans cette étude, nous proposons une approche unificatrice générale qui permettrait de reproduire l’ensemble de ces méthodes.
 Cela a un double intérêt.
 D’une part, cela permet de faire une première revue de la littérature sur les méthodes de construction des filtres linéaires pour l’analyse conjoncturelle.
 D’autre part, cela permet de montrer les liens entre toutes ces approches et de les comparer en utilisant une même méthodologie.</p>
-<p>Pour cela nous utiliserons l’approche générale de <span class="citation"><a href="#ref-ch15HBSA" role="doc-biblioref">Grun-Rehomme, Guggemos, et Ladiray</a> (<a href="#ref-ch15HBSA" role="doc-biblioref">2018</a>)</span> (section <a href="sec-theoriegen.html#subsec-theoriegen">3.1</a>) qui ont également proposé une procédure globale pour construire des moyennes mobiles asymétriques permettant de minimiser les effets de déphasage (section <a href="sec-theoriegen.html#subsec-GuggemosEtAl">3.2</a>).
+<p>Pour cela nous utiliserons l’approche générale de <span class="citation">Grun-Rehomme, Guggemos, et Ladiray (<a href="#ref-ch15HBSA" role="doc-biblioref">2018</a>)</span> (section <a href="sec-theoriegen.html#subsec-theoriegen">3.1</a>) qui ont également proposé une procédure globale pour construire des moyennes mobiles asymétriques permettant de minimiser les effets de déphasage (section <a href="sec-theoriegen.html#subsec-GuggemosEtAl">3.2</a>).
 Des diagrammes synthétiques des liens entre les différentes méthodes étudiées sont présentés dans l’annexe <a href="an-diag.html#an-diag">A</a>.</p>
 <p>Nous nous intéresserons uniquement aux estimations intermédiaires de la tendance-cycle faites en temps réels.
 Le filtre symétrique utilisé pour les estimations finales ne sera pas remis en cause et sera celui d’Henderson.
 Nous nous concentrons également sur les méthodes qui pourraient être implémentées dans X-13ARIMA.
 Pour maintenir la cohérence avec l’approche non paramétrique de X-13ARIMA, nous nous concentrons sur les méthodes d’extraction non paramétriques.
-C’est pourquoi ni les filtres de l’approche de <span class="citation"><a href="#ref-trilemmaWMR2019" role="doc-biblioref">Wildi et McElroy</a> (<a href="#ref-trilemmaWMR2019" role="doc-biblioref">2019</a>)</span> (section <a href="sec-WildiMcLeroy.html#sec-WildiMcLeroy">4</a>), ni d’autres approches basées sur des modèles ne sont, pour l’instant, utilisées dans les simulations.
+C’est pourquoi ni les filtres de l’approche de <span class="citation">Wildi et McElroy (<a href="#ref-trilemmaWMR2019" role="doc-biblioref">2019</a>)</span> (section <a href="sec-WildiMcLeroy.html#sec-WildiMcLeroy">4</a>), ni d’autres approches basées sur des modèles ne sont, pour l’instant, utilisées dans les simulations.
 Même si les différentes méthodes sont comparées en les appliquant sur des séries déjà désaisonnalisée, elles peuvent être intégrées dans l’algorithme de désaisonnalisation X-11 grâce à la fonction <code>rjdfilters::x11()</code>.
 L’ensemble des filtres utilisés sont résumés dans l’annexe <a href="an-graphs.html#an-graphs">B</a>.</p>
 
 </div>
-<h3>Références</h3>
+<h3>Références<a href="références.html#références" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-alexandrov2012TEreview" class="csl-entry">
 Alexandrov, Theodore, Silvia Bianconcini, Estela Dagum, Peter Maass, et Tucker McElroy. 2012. <span>« A Review of Some Modern Approaches to the Problem of Trend Extraction »</span>. <em>Econometric Reviews</em> 31 (novembre): 593‑624. <a href="https://doi.org/10.1080/07474938.2011.608032">https://doi.org/10.1080/07474938.2011.608032</a>.
@@ -344,7 +343,7 @@ Proietti, Tommaso, et Alessandra Luati. 2008. <span>« Real time estimation in 
 <ol start="5">
 <li id="fn5"><p>Voir <a href="https://github.com/jdemetra/jdemetra-core" class="uri">https://github.com/jdemetra/jdemetra-core</a>.<a href="sec-SAtoTCE.html#fnref5" class="footnote-back">↩︎</a></p></li>
 <li id="fn6"><p>Disponible sur <a href="https://github.com/palatej/rjdfilters" class="uri">https://github.com/palatej/rjdfilters</a>.<a href="sec-SAtoTCE.html#fnref6" class="footnote-back">↩︎</a></p></li>
-<li id="fn7"><p>Voir par exemple <span class="citation"><a href="#ref-alexandrov2012TEreview" role="doc-biblioref">Alexandrov et al.</a> (<a href="#ref-alexandrov2012TEreview" role="doc-biblioref">2012</a>)</span> pour une revue de la littérature sur les méthodes d’extraction de tendance.<a href="sec-SAtoTCE.html#fnref7" class="footnote-back">↩︎</a></p></li>
+<li id="fn7"><p>Voir par exemple <span class="citation">Alexandrov et al. (<a href="#ref-alexandrov2012TEreview" role="doc-biblioref">2012</a>)</span> pour une revue de la littérature sur les méthodes d’extraction de tendance.<a href="sec-SAtoTCE.html#fnref7" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -395,7 +394,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["AQLT_JMS_2022.pdf", "AQLT_JMS_2022.docx", "AQLT_JMS_2022.tex"],
+"download": ["S27_2_ACTE_QUARTIERLATENTE_JMS2022.pdf", "S27_2_ACTE_QUARTIERLATENTE_JMS2022.docx", "S27_2_ACTE_QUARTIERLATENTE_JMS2022.tex"],
 "search": {
 "engine": "fuse",
 "options": null

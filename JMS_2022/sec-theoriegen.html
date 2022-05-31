@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapitre 3 D’une théorie générale sur la construction des filtres asymétriques à l’approche FST | Estimation en temps réel de la tendance-cycle : apport de l’utilisation des filtres asymétriques dans la détection des points de retournement</title>
   <meta name="description" content="Journées de méthodologie statistique de l’Insee (JMS) / Mars 2022 / PARIS" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapitre 3 D’une théorie générale sur la construction des filtres asymétriques à l’approche FST | Estimation en temps réel de la tendance-cycle : apport de l’utilisation des filtres asymétriques dans la détection des points de retournement" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="Journées de méthodologie statistique de l’Insee (JMS) / Mars 2022 / PARIS" />
   
@@ -24,7 +23,7 @@
 <meta name="author" content="Alain Quartier-la-Tente" />
 
 
-<meta name="date" content="2022-03-17" />
+<meta name="date" content="2022-05-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +32,6 @@
   
 <link rel="prev" href="sec-propMM.html"/>
 <link rel="next" href="sec-WildiMcLeroy.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <link href="libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
@@ -96,7 +95,7 @@ div.csl-indent {
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">JMS 2022</a></li>
+<li><a href="./">JMS 2022 AQLT</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Résumé</a></li>
@@ -260,19 +259,19 @@ div.csl-indent {
     </div>
     </body>
             
-<div id="sec-theoriegen" class="section level1" number="3">
-<h1><span class="header-section-number">Chapitre 3</span> D’une théorie générale sur la construction des filtres asymétriques à l’approche FST</h1>
-<div id="subsec-theoriegen" class="section level2" number="3.1">
-<h2><span class="header-section-number">3.1</span> Théorie générale de construction des filtres asymétriques</h2>
-<p>Pour établir une théorie générale englobant les principaux filtres linéaires, <span class="citation"><a href="#ref-ch15HBSA" role="doc-biblioref">Grun-Rehomme, Guggemos, et Ladiray</a> (<a href="#ref-ch15HBSA" role="doc-biblioref">2018</a>)</span> définissent deux critères.
+<div id="sec-theoriegen" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapitre 3</span> D’une théorie générale sur la construction des filtres asymétriques à l’approche FST<a href="sec-theoriegen.html#sec-theoriegen" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="subsec-theoriegen" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Théorie générale de construction des filtres asymétriques<a href="sec-theoriegen.html#subsec-theoriegen" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Pour établir une théorie générale englobant les principaux filtres linéaires, <span class="citation">Grun-Rehomme, Guggemos, et Ladiray (<a href="#ref-ch15HBSA" role="doc-biblioref">2018</a>)</span> définissent deux critères.
 En changeant légèrement les notations utilisées par les auteurs afin d’avoir une formulation plus générale, ces deux critères peuvent s’écrire :
 <span class="math display" id="eq:theoriegen2" id="eq:theoriegen1">\[\begin{align}
 I(\theta,q,y_t,u_t)&amp;=\E{(\Delta^{q}M_\theta y_t-u_t)^{2}} \tag{3.1} \\
-J(\theta,f, \omega_1,\omega_2)&amp;=\int_{\omega_1}^{\omega_2} f\left[\phi_\theta(\omega), \varphi_\theta (\omega), \omega\right] \ud \omega \tag{3.2}
+J(\theta,f, \omega_1,\omega_2)&amp;=\int_{\omega_1}^{\omega_2} f\left[\rho_\theta(\omega), \varphi_\theta (\omega), \omega\right] \ud \omega \tag{3.2}
 \end{align}\]</span>
 où <span class="math inline">\(y_t\)</span> est la série étudiée, <span class="math inline">\(u_t\)</span> une série de référence et <span class="math inline">\(\Delta\)</span> est l’opérateur différence (<span class="math inline">\(\Delta y_t=y_t-y_{t-1}\)</span> et <span class="math inline">\(\Delta^q=\underbrace{\Delta \circ \dots \circ \Delta}_{q\text{ fois}}\)</span> pour <span class="math inline">\(q\in\N\)</span>).
-Dans la majorité des cas, la fonction <span class="math inline">\(f\)</span> ne dépendra que de la fonction de gain, <span class="math inline">\(\phi_\theta\)</span>, et de la fonction de déphasage, <span class="math inline">\(\varphi_\theta\)</span>.
-Dans ce cas, par simplification on écrira <span class="math inline">\(f\left[\phi_\theta(\omega), \varphi_\theta (\omega), \omega\right] = f\left[\phi_\theta(\omega), \varphi_\theta (\omega)\right]\)</span>.</p>
+Dans la majorité des cas, la fonction <span class="math inline">\(f\)</span> ne dépendra que de la fonction de gain, <span class="math inline">\(\rho_\theta\)</span>, et de la fonction de déphasage, <span class="math inline">\(\varphi_\theta\)</span>.
+Dans ce cas, par simplification on écrira <span class="math inline">\(f\left[\rho_\theta(\omega), \varphi_\theta (\omega), \omega\right] = f\left[\rho_\theta(\omega), \varphi_\theta (\omega)\right]\)</span>.</p>
 <p>Comme montré dans cette étude, la majorité des filtres linéaires peut s’obtenir par une minimisation d’une somme pondérée de ces critères, sous contrainte linéaire sur les coefficients :</p>
 <p><span class="math display">\[
 \begin{cases}
@@ -283,10 +282,10 @@ s.t. &amp; C\theta=a
 \]</span></p>
 <p>C’est en particulier le cas de l’approche <em>Fidelity-Smoothness-Timeliness</em> (FST) développée par les mêmes auteurs.</p>
 </div>
-<div id="subsec-GuggemosEtAl" class="section level2" number="3.2">
-<h2><span class="header-section-number">3.2</span> Approche <em>Fidelity-Smoothness-Timeliness</em> (FST)</h2>
-<p>Pour construire les moyennes mobiles symétriques, <span class="citation"><a href="#ref-GrunRehommeLadiray1994" role="doc-biblioref">Grun-Rehomme et Ladiray</a> (<a href="#ref-GrunRehommeLadiray1994" role="doc-biblioref">1994</a>)</span> et <span class="citation"><a href="#ref-GrayThomson1996" role="doc-biblioref">Gray et Thomson</a> (<a href="#ref-GrayThomson1996" role="doc-biblioref">1996</a>)</span> proposent un programme de minimisation sous contrainte qui fait un compromis entre réduction de la variance et « lissage » de la tendance.
-<span class="citation"><a href="#ref-ch15HBSA" role="doc-biblioref">Grun-Rehomme, Guggemos, et Ladiray</a> (<a href="#ref-ch15HBSA" role="doc-biblioref">2018</a>)</span> étendent ces approches en les appliquant à la construction des filtres asymétriques et en ajoutant un critère permettant de contrôler le déphasage.
+<div id="subsec-GuggemosEtAl" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Approche <em>Fidelity-Smoothness-Timeliness</em> (FST)<a href="sec-theoriegen.html#subsec-GuggemosEtAl" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Pour construire les moyennes mobiles symétriques, <span class="citation">Grun-Rehomme et Ladiray (<a href="#ref-GrunRehommeLadiray1994" role="doc-biblioref">1994</a>)</span> et <span class="citation">Gray et Thomson (<a href="#ref-GrayThomson1996" role="doc-biblioref">1996</a>)</span> proposent un programme de minimisation sous contrainte qui fait un compromis entre réduction de la variance et « lissage » de la tendance.
+<span class="citation">Grun-Rehomme, Guggemos, et Ladiray (<a href="#ref-ch15HBSA" role="doc-biblioref">2018</a>)</span> étendent ces approches en les appliquant à la construction des filtres asymétriques et en ajoutant un critère permettant de contrôler le déphasage.
 Il s’agit de l’approche <em>Fidelity-Smoothness-Timeliness</em> — Fidélité-Lissage-Temporalité — (FST).
 Pour la construction des filtres asymétriques, un quatrième critère pourrait également être rajouté qui prendrait en compte les révisions par rapport à l’utilisation d’un filtre symétrique de référence (cette méthode pourrait alors être appelée la méthode FRST — <em>Fidelity-Revisions-Smoothness-Timeliness</em>).
 Cependant, le <em>package</em> <code>rjdfilters</code> n’ayant implémenté que l’approche FST, nous nous restreignons dans cette étude qu’à la description de l’approche sans critère de révision.</p>
@@ -312,14 +311,15 @@ C’est pourquoi le critère de déphasage dépend des fonctions de gain et de d
 \int_{\omega_{1}}^{\omega_{2}}f(\rho_{\theta}(\omega),\varphi_{\theta}(\omega))\ud\omega.
 \]</span>
 Comme fonction de pénalité, les auteurs suggèrent de prendre <span class="math inline">\(f\colon(\rho,\varphi)\mapsto\rho^2\sin(\varphi)^2\)</span>.
-Cela permet notamment d’avoir une <em>timeliness</em> qui peut s’écrire comme une forme quadratique positive (<span class="math inline">\(T_g(\theta)=\theta&#39;T\theta\)</span> avec <span class="math inline">\(T\)</span> une matrice carré symétrique d’ordre <span class="math inline">\(p+f+1\)</span>, voir <span class="citation"><a href="#ref-ch15HBSA" role="doc-biblioref">Grun-Rehomme, Guggemos, et Ladiray</a> (<a href="#ref-ch15HBSA" role="doc-biblioref">2018</a>)</span> pour la démonstration).
+Cela permet notamment d’avoir une <em>timeliness</em> qui peut s’écrire comme une forme quadratique positive (<span class="math inline">\(T_g(\theta)=\theta&#39;T\theta\)</span> avec <span class="math inline">\(T\)</span> une matrice carré symétrique d’ordre <span class="math inline">\(p+f+1\)</span>, voir <span class="citation">Grun-Rehomme, Guggemos, et Ladiray (<a href="#ref-ch15HBSA" role="doc-biblioref">2018</a>)</span> pour la démonstration).
 Dans cet article nous utilisons <span class="math inline">\(\omega_1=0\)</span> et <span class="math inline">\(\omega_2=2\pi/12\)</span> : on ne s’intéresse qu’à des séries mensuelles et au déphasage qui impactent les cycles d’au minimum 12 mois.</p></li>
 </ul>
 <p>En somme, l’approche FST consiste à minimiser une somme pondérée de ces trois critères sous certaines contraintes (généralement préservation polynomiale).</p>
 <p><span class="math display" id="eq:gugemmos">\[\begin{equation}
 \begin{cases}
 \underset{\theta}{\min} &amp;
-\alpha F_g(\theta)+\beta S_g(\theta)+\gamma T_g(\theta) = \theta&#39;(F+S+T)\theta\\
+\alpha F_g(\theta)+\beta S_g(\theta)+\gamma T_g(\theta) =
+\theta&#39;(\alpha F+\beta S+ \gamma T)\theta\\
 s.t. &amp; C\theta=a
 \end{cases}. \tag{3.3}
 \end{equation}\]</span></p>
@@ -348,7 +348,7 @@ T_g(\theta) &amp; = J(f\colon(\rho,\varphi)\mapsto\rho^2\sin(\varphi)^2,\,\omega
 \end{align*}\]</span></p>
 <div class="summary_box">
 <div class="title">
-<p>Filtres FST - <span class="citation"><a href="#ref-ch15HBSA" role="doc-biblioref">Grun-Rehomme, Guggemos, et Ladiray</a> (<a href="#ref-ch15HBSA" role="doc-biblioref">2018</a>)</span></p>
+<p>Filtres FST - <span class="citation">Grun-Rehomme, Guggemos, et Ladiray (<a href="#ref-ch15HBSA" role="doc-biblioref">2018</a>)</span></p>
 </div>
 <p><strong>Avantages</strong> :</p>
 <ul>
@@ -364,7 +364,7 @@ T_g(\theta) &amp; = J(f\colon(\rho,\varphi)\mapsto\rho^2\sin(\varphi)^2,\,\omega
 
 </div>
 </div>
-<h3>Références</h3>
+<h3>Références<a href="références.html#références" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-GrayThomson1996" class="csl-entry">
 Gray, Alistair, et Peter Thomson. 1996. <span>« Design of Moving-Average Trend Filters using Fidelity and Smoothness Criteria »</span>. In <em>Athens Conference on Applied Probability and Time Series Analysis</em>, édité par P. M. Robinson et Murray Rosenblatt, 205‑19. New York, NY: Springer New York.
@@ -380,7 +380,7 @@ Grun-Rehomme, Michel, et Dominique Ladiray. 1994. <span>« Moyennes mobiles cen
 <hr />
 <ol start="11">
 <li id="fn11"><p>
-<span class="citation"><a href="#ref-ch15HBSA" role="doc-biblioref">Grun-Rehomme, Guggemos, et Ladiray</a> (<a href="#ref-ch15HBSA" role="doc-biblioref">2018</a>)</span> suggèrent 6 conditions de régularité à la fonction de pénalité afin qu’elle soit adaptée au problème de déphasage.
+<span class="citation">Grun-Rehomme, Guggemos, et Ladiray (<a href="#ref-ch15HBSA" role="doc-biblioref">2018</a>)</span> suggèrent 6 conditions de régularité à la fonction de pénalité afin qu’elle soit adaptée au problème de déphasage.
 Dans leur article, la fonction <span class="math inline">\(f\)</span> ne dépend que du gain et du déphasage de <span class="math inline">\(\theta\)</span> et les 6 conditions sont : <span class="math inline">\(f \geq 0\)</span>, <span class="math inline">\(f\left(\rho,0\right)=0\)</span>, <span class="math inline">\(f\left(0,\varphi\right)=0\)</span>, <span class="math inline">\(f\left(\rho,\varphi\right)=f\left(\rho,-\varphi\right)\)</span>, <span class="math inline">\(\frac{\partial f}{\partial \rho} \geq 0\)</span> et
 <span class="math inline">\(\varphi \cdot \frac{\partial f}{\partial \varphi} \geq 0\)</span>.<a href="sec-theoriegen.html#fnref11" class="footnote-back">↩︎</a></p></li>
 </ol>
@@ -433,7 +433,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["AQLT_JMS_2022.pdf", "AQLT_JMS_2022.docx", "AQLT_JMS_2022.tex"],
+"download": ["S27_2_ACTE_QUARTIERLATENTE_JMS2022.pdf", "S27_2_ACTE_QUARTIERLATENTE_JMS2022.docx", "S27_2_ACTE_QUARTIERLATENTE_JMS2022.tex"],
 "search": {
 "engine": "fuse",
 "options": null

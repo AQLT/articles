@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapitre 2 Quelques propriétés sur les moyennes mobiles | Estimation en temps réel de la tendance-cycle : apport de l’utilisation des filtres asymétriques dans la détection des points de retournement</title>
   <meta name="description" content="Journées de méthodologie statistique de l’Insee (JMS) / Mars 2022 / PARIS" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapitre 2 Quelques propriétés sur les moyennes mobiles | Estimation en temps réel de la tendance-cycle : apport de l’utilisation des filtres asymétriques dans la détection des points de retournement" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="Journées de méthodologie statistique de l’Insee (JMS) / Mars 2022 / PARIS" />
   
@@ -24,7 +23,7 @@
 <meta name="author" content="Alain Quartier-la-Tente" />
 
 
-<meta name="date" content="2022-03-17" />
+<meta name="date" content="2022-05-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +32,6 @@
   
 <link rel="prev" href="sec-SAtoTCE.html"/>
 <link rel="next" href="sec-theoriegen.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <link href="libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
@@ -96,7 +95,7 @@ div.csl-indent {
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">JMS 2022</a></li>
+<li><a href="./">JMS 2022 AQLT</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Résumé</a></li>
@@ -260,9 +259,9 @@ div.csl-indent {
     </div>
     </body>
             
-<div id="sec-propMM" class="section level1" number="2">
-<h1><span class="header-section-number">Chapitre 2</span> Quelques propriétés sur les moyennes mobiles</h1>
-<p>Cette section présente les définitions et les propriétés des moyennes mobiles utiles pour comprendre les méthodes présentées dans les prochaines sections. Pour plus de détails sur les moyennes mobiles, voir par exemple <span class="citation"><a href="#ref-ch12HBSA" role="doc-biblioref">Ladiray</a> (<a href="#ref-ch12HBSA" role="doc-biblioref">2018</a>)</span>.</p>
+<div id="sec-propMM" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Chapitre 2</span> Quelques propriétés sur les moyennes mobiles<a href="sec-propMM.html#sec-propMM" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Cette section présente les définitions et les propriétés des moyennes mobiles utiles pour comprendre les méthodes présentées dans les prochaines sections. Pour plus de détails sur les moyennes mobiles, voir par exemple <span class="citation">Ladiray (<a href="#ref-ch12HBSA" role="doc-biblioref">2018</a>)</span>.</p>
 <p>Soient deux entiers <span class="math inline">\(p\)</span> et <span class="math inline">\(f\)</span>.
 Une <em>moyenne mobile</em> <span class="math inline">\(M_\theta\)</span> ou <span class="math inline">\(M\)</span> est un opérateur linéaire définit par un ensemble de coefficients <span class="math inline">\(\theta=(\theta_{-p},\dots,\theta_{f})&#39;\)</span> qui transforme toute série temporelle <span class="math inline">\(X_t\)</span> en :
 <span class="math display">\[
@@ -275,8 +274,8 @@ On a les définitions suivantes :</p>
 Si de plus on a <span class="math inline">\(\forall k:\:\theta_{-k} = \theta_k\)</span>, la moyenne mobile <span class="math inline">\(M_\theta\)</span> est dite <em>symétrique</em>.
 Dans ce cas, la quantité <span class="math inline">\(h=p=f\)</span> est appelée <em>fenêtre</em> (<em>bandwidth</em>).</p></li>
 </ul>
-<div id="gain-et-fonction-de-déphasage" class="section level2" number="2.1">
-<h2><span class="header-section-number">2.1</span> Gain et fonction de déphasage</h2>
+<div id="gain-et-fonction-de-déphasage" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Gain et fonction de déphasage<a href="sec-propMM.html#gain-et-fonction-de-déphasage" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Soit <span class="math inline">\(X_t=\e^{-i\omega t}\)</span> avec <span class="math inline">\(\omega\in[0,\pi]\)</span>. La moyenne mobile <span class="math inline">\(M_\theta\)</span> transforme <span class="math inline">\(X_t\)</span> en :
 <span class="math display">\[
 Y_t = M_{\theta}X_t = \sum_{k=-p}^{+f} \theta_k \e^{-i \omega (t+k)}
@@ -285,26 +284,26 @@ Y_t = M_{\theta}X_t = \sum_{k=-p}^{+f} \theta_k \e^{-i \omega (t+k)}
 La fonction <span class="math inline">\(\Gamma_\theta(\omega)=\sum_{k=-p}^{+f} \theta_k e^{-i \omega k}\)</span> est appelée <em>fonction de transfert</em> ou <em>fonction de réponse en fréquence</em> (<em>frequency response function</em>)<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>.
 Elle peut être réécrite en :
 <span class="math display">\[
-\Gamma_\theta(\omega) = G_\theta(\omega)\e^{-i\Phi_\theta(\omega)},
+\Gamma_\theta(\omega) = \rho_\theta(\omega)\e^{-i\varphi_\theta(\omega)},
 \]</span>
-où <span class="math inline">\(G_\theta(\omega)=\lvert\Gamma_\theta(\omega)\rvert\)</span> est la fonction de <em>gain</em> ou <em>d’amplitude</em> et <span class="math inline">\(\Phi_\theta(\omega)\)</span> est le <em>déphasage</em> (<em>phase shift</em> ou <em>time shift</em>)<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a>.
+où <span class="math inline">\(\rho_\theta(\omega)=G_\theta(\omega)=\lvert\Gamma_\theta(\omega)\rvert\)</span> est la fonction de <em>gain</em> ou <em>d’amplitude</em> et <span class="math inline">\(\varphi_\theta(\omega)\)</span> est le <em>déphasage</em> (<em>phase shift</em> ou <em>time shift</em>)<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a>.
 Pour tous les filtres symétriques on a <span class="math inline">\(\Phi_\theta(\omega)\equiv 0 \;(modulo\;{\pi})\)</span>.</p>
 <p>En somme, appliquer une moyenne mobile à une série harmonique la modifie de deux façons :</p>
 <ul>
-<li><p>en la multipliant par un coefficient égal à <span class="math inline">\(G_{\theta}\left(\omega\right)\)</span> (gain) ;</p></li>
-<li><p>en la « décalant » dans le temps de <span class="math inline">\(\Phi_\theta(\omega)/\omega\)</span>, ce qui a un impact sur la détection des points de retournement (déphasage).<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a></p></li>
+<li><p>en la multipliant par un coefficient égal à <span class="math inline">\(\rho_{\theta}\left(\omega\right)\)</span> (gain) ;</p></li>
+<li><p>en la « décalant » dans le temps de <span class="math inline">\(\varphi_\theta(\omega)/\omega\)</span>, ce qui a un impact sur la détection des points de retournement (déphasage) <a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a>.</p></li>
 </ul>
 </div>
-<div id="propriétés-souhaitables-dune-moyenne-mobile" class="section level2" number="2.2">
-<h2><span class="header-section-number">2.2</span> Propriétés souhaitables d’une moyenne mobile</h2>
+<div id="propriétés-souhaitables-dune-moyenne-mobile" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Propriétés souhaitables d’une moyenne mobile<a href="sec-propMM.html#propriétés-souhaitables-dune-moyenne-mobile" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Pour décomposer une série temporelle en une composante saisonnière, une tendance-cycle et l’irrégulier, l’algorithme de décomposition X-11 (utilisé dans X-13ARIMA) utilise une succession de moyennes mobiles ayant toutes des contraintes spécifiques.
 Dans cette sous-section nous décrivons deux types de contraintes :</p>
 <ul>
 <li><p>la préservation de certaines tendances ;</p></li>
 <li><p>la réduction du bruit.</p></li>
 </ul>
-<div id="préservation-de-tendances" class="section level3" number="2.2.1">
-<h3><span class="header-section-number">2.2.1</span> Préservation de tendances</h3>
+<div id="préservation-de-tendances" class="section level3 hasAnchor" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> Préservation de tendances<a href="sec-propMM.html#préservation-de-tendances" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Il est souvent souhaitable qu’une moyenne mobile conserve certaines tendances.
 Une moyenne mobile <span class="math inline">\(M_\theta\)</span> conserve une fonction du temps <span class="math inline">\(f(t)\)</span> si <span class="math inline">\(\forall t:\:M_\theta f(t)=f(t)\)</span>.</p>
 <p>Nous avons les propriétés suivantes pour la moyenne mobile <span class="math inline">\(M_\theta\)</span> :</p>
@@ -327,15 +326,15 @@ Ce qui est équivalent à :
 <li><p>De manière générale, <span class="math inline">\(M_\theta\)</span> conserves les tendances de degré <span class="math inline">\(d\)</span> si et seulement si :
 <span class="math display">\[
 \sum_{k=-p}^{+f}\theta_k=1
- \text{ et }
+\text{ et }
 \forall j \in \left\llbracket 1,d\right\rrbracket:\:
 \sum_{k=-p}^{+f}k^j\theta_k=0.
 \]</span></p></li>
 <li><p>Si <span class="math inline">\(M_\theta\)</span> est symétrique (<span class="math inline">\(p=f\)</span> et <span class="math inline">\(\theta_{-k} = \theta_k\)</span>) et conserve les tendances de degré <span class="math inline">\(2d\)</span> alors elle conserve aussi les tendances de degré <span class="math inline">\(2d+1\)</span>.</p></li>
 </ul>
 </div>
-<div id="réduction-du-bruit" class="section level3" number="2.2.2">
-<h3><span class="header-section-number">2.2.2</span> Réduction du bruit</h3>
+<div id="réduction-du-bruit" class="section level3 hasAnchor" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> Réduction du bruit<a href="sec-propMM.html#réduction-du-bruit" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Toutes les séries temporelles sont affectées par du bruit qui peut brouiller l’extraction du signal.
 C’est pourquoi on cherche à réduire ce bruit (en réduisant sa variance) tout en conservant le signal (en utilisant les propriétés vues dans les sections précédentes).
 La somme des carrés des coefficients <span class="math inline">\(\sum_{k=-p}^{+f}\theta_k^2\)</span> est le rapport de <em>réduction de la variance</em>.</p>
@@ -348,16 +347,16 @@ On a :
 \]</span></p>
 </div>
 </div>
-<div id="sec-mmasym" class="section level2" number="2.3">
-<h2><span class="header-section-number">2.3</span> Estimation en temps réel et moyennes mobiles asymétriques</h2>
+<div id="sec-mmasym" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Estimation en temps réel et moyennes mobiles asymétriques<a href="sec-propMM.html#sec-mmasym" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Pour les filtres symétriques, la fonction de déphasage est égale à zéro (modulo <span class="math inline">\(\pi\)</span>).
 Il n’y a donc aucun retard dans la détection de points de retournement.
 Ils ne peuvent toutefois pas être utilisés au début et à la fin de la série car aucune valeur passée/future n’est connue.</p>
-<div id="subec:mmetprev" class="section level3" number="2.3.1">
-<h3><span class="header-section-number">2.3.1</span> Moyennes mobiles asymétriques et prévision</h3>
+<div id="subec:mmetprev" class="section level3 hasAnchor" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> Moyennes mobiles asymétriques et prévision<a href="sec-propMM.html#subec:mmetprev" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>En début et en fin de série, les moyennes mobiles asymétriques ne peuvent être utilisées du fait du manque de données disponibles.
 Une solution est de prolonger la série par prévision pour ensuite appliquer le filtre symétrique.
-Cette méthode semble remonter à <span class="citation"><a href="#ref-deforest1877adjustment" role="doc-biblioref">De Forest</a> (<a href="#ref-deforest1877adjustment" role="doc-biblioref">1877</a>)</span> qui suggère également de modéliser en fin de période une tendance polynomiale de degré au plus trois :</p>
+Cette méthode semble remonter à <span class="citation">De Forest (<a href="#ref-deforest1877adjustment" role="doc-biblioref">1877</a>)</span> qui suggère également de modéliser en fin de période une tendance polynomiale de degré au plus trois :</p>
 <div class="quote">
 <p>« <em>As the first <span class="math inline">\(m\)</span> and last <span class="math inline">\(m\)</span> terms of the series cannot be reached directly by the formula, the series should be graphically extended by m terms at both ends, first plotting the observations on paper as ordinates, and then extending the curve along what seems to be its probable course, and measuring the ordinates of the extended portions.</em>
 <em>It is not necessary that this extension should coincide with what would be the true course of the curve in those parts. </em>
@@ -376,7 +375,7 @@ Cela signifie, que pour tout <span class="math inline">\(q\)</span> on a :
 \]</span>
 Ce qui est équivalent à :
 <span class="math display">\[
-\forall q, \quad \sum_{i=1}^h (v_i- w_i^q) y_i^**
+\forall q, \quad \sum_{i=1}^h (v_i- w_i^q) y_i^*
 =\sum_{i=-h}^0 (w_i^q-v_i)y_i.
 \]</span>
 En somme, matriciellement, cela revient donc à résoudre :
@@ -396,18 +395,18 @@ En somme, matriciellement, cela revient donc à résoudre :
 \end{pmatrix}
 \begin{pmatrix}y_{-h} \\ \vdots \\ y_0\end{pmatrix}.\]</span>
 C’est ce qui implémenté dans la fonction <code>rjdfilters::implicit_forecast</code>.</p>
-<p>Comme notamment souligné par <span class="citation"><a href="#ref-wildischis2004" role="doc-biblioref">Wildi et Schips</a> (<a href="#ref-wildischis2004" role="doc-biblioref">2004</a>)</span>, étendre la série par prévision d’un modèle ARIMA revient à calculer des filtres asymétriques dont les coefficients sont optimisés par rapport à la prévision avec une longueur d’avance — <em>one-step ahead forecasting</em>.
+<p>Comme notamment souligné par <span class="citation">Wildi et Schips (<a href="#ref-wildischis2004" role="doc-biblioref">2004</a>)</span>, étendre la série par prévision d’un modèle ARIMA revient à calculer des filtres asymétriques dont les coefficients sont optimisés par rapport à la prévision avec une longueur d’avance — <em>one-step ahead forecasting</em>.
 Autrement dit, on cherche à minimiser les révisions entre la première et la dernière estimation (avec le filtre symétrique).
 Cependant, puisque les coefficients du filtre symétrique décroissent lentement, il faudrait également s’intéresser à la performance des prévisions avec plusieurs longueurs d’avance — <em>multi-step ahead forecasting</em>.
 Par ailleurs, le déphasage induit par les filtres asymétriques n’est pas contrôlé : on pourrait préférer avoir une détection plus rapide des points de retournement et une révision plus grande plutôt que de juste minimiser les révisions entre la première et la dernière estimation.
 C’est pourquoi il peut être nécessaire de définir des critères alternatifs pour juger la qualité des moyennes mobiles asymétriques.</p>
 </div>
-<div id="indicateurs-de-qualité-des-moyennes-mobiles-asymétriques" class="section level3" number="2.3.2">
-<h3><span class="header-section-number">2.3.2</span> Indicateurs de qualité des moyennes mobiles asymétriques</h3>
-<p>Pour les filtres asymétriques, la majorité des critères proviennent de ceux définis par <span class="citation"><a href="#ref-ch15HBSA" role="doc-biblioref">Grun-Rehomme, Guggemos, et Ladiray</a> (<a href="#ref-ch15HBSA" role="doc-biblioref">2018</a>)</span> et <span class="citation"><a href="#ref-trilemmaWMR2019" role="doc-biblioref">Wildi et McElroy</a> (<a href="#ref-trilemmaWMR2019" role="doc-biblioref">2019</a>)</span> pour construire les filtres asymétriques. Ils sont résumés dans le tableau <a href="sec-propMM.html#tab:QC">2.1</a> et calculables avec la fonction fonction <code>rjdfilters::diagnostic_matrix</code>.</p>
-<p><span class="citation"><a href="#ref-ch15HBSA" role="doc-biblioref">Grun-Rehomme, Guggemos, et Ladiray</a> (<a href="#ref-ch15HBSA" role="doc-biblioref">2018</a>)</span> proposent une approche générale pour dériver des filtres linéaires, basée sur un problème d’optimisation de trois critères : <em>Fidelity</em> (<span class="math inline">\(F_g\)</span>, réduction de la variance), <em>Smoothness</em> (<span class="math inline">\(S_g\)</span>, lissage) et <em>Timeliness</em> (<span class="math inline">\(T_g\)</span>, déphasage).
+<div id="indicateurs-de-qualité-des-moyennes-mobiles-asymétriques" class="section level3 hasAnchor" number="2.3.2">
+<h3><span class="header-section-number">2.3.2</span> Indicateurs de qualité des moyennes mobiles asymétriques<a href="sec-propMM.html#indicateurs-de-qualité-des-moyennes-mobiles-asymétriques" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Pour les filtres asymétriques, la majorité des critères proviennent de ceux définis par <span class="citation">Grun-Rehomme, Guggemos, et Ladiray (<a href="#ref-ch15HBSA" role="doc-biblioref">2018</a>)</span> et <span class="citation">Wildi et McElroy (<a href="#ref-trilemmaWMR2019" role="doc-biblioref">2019</a>)</span> pour construire les filtres asymétriques. Ils sont résumés dans le tableau <a href="sec-propMM.html#tab:QC">2.1</a> et calculables avec la fonction fonction <code>rjdfilters::diagnostic_matrix</code>.</p>
+<p><span class="citation">Grun-Rehomme, Guggemos, et Ladiray (<a href="#ref-ch15HBSA" role="doc-biblioref">2018</a>)</span> proposent une approche générale pour dériver des filtres linéaires, basée sur un problème d’optimisation de trois critères : <em>Fidelity</em> (<span class="math inline">\(F_g\)</span>, réduction de la variance), <em>Smoothness</em> (<span class="math inline">\(S_g\)</span>, lissage) et <em>Timeliness</em> (<span class="math inline">\(T_g\)</span>, déphasage).
 Voir section <a href="sec-theoriegen.html#subsec-GuggemosEtAl">3.2</a> pour plus de détails.</p>
-<p><span class="citation"><a href="#ref-trilemmaWMR2019" role="doc-biblioref">Wildi et McElroy</a> (<a href="#ref-trilemmaWMR2019" role="doc-biblioref">2019</a>)</span> proposent une approche basée sur la décomposition de l’erreur quadratique moyenne entre le filtre symétrique et le filtre asymétrique en quatre quantités : <em>Accuracy</em> (<span class="math inline">\(A_w\)</span>, précision), <em>Timeliness</em> (<span class="math inline">\(T_w\)</span>, déphasage), <em>Smoothness</em> (<span class="math inline">\(S_w\)</span>, lissage) et <em>Residual</em> (<span class="math inline">\(R_w\)</span>, résidus).
+<p><span class="citation">Wildi et McElroy (<a href="#ref-trilemmaWMR2019" role="doc-biblioref">2019</a>)</span> proposent une approche basée sur la décomposition de l’erreur quadratique moyenne entre le filtre symétrique et le filtre asymétrique en quatre quantités : <em>Accuracy</em> (<span class="math inline">\(A_w\)</span>, précision), <em>Timeliness</em> (<span class="math inline">\(T_w\)</span>, déphasage), <em>Smoothness</em> (<span class="math inline">\(S_w\)</span>, lissage) et <em>Residual</em> (<span class="math inline">\(R_w\)</span>, résidus).
 Voir section <a href="sec-WildiMcLeroy.html#sec-WildiMcLeroy">4</a> pour plus de détails.</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
@@ -541,7 +540,7 @@ Residual (Wildi)
 </table>
 <div id="note" class="caption">
 <p id="note" class="title caption">
-<span class="math inline">\(X_g\)</span> critères provenant de <span class="citation"><a href="#ref-ch15HBSA" role="doc-biblioref">Grun-Rehomme, Guggemos, et Ladiray</a> (<a href="#ref-ch15HBSA" role="doc-biblioref">2018</a>)</span> et <span class="math inline">\(X_w\)</span> critères provenant de <span class="citation"><a href="#ref-trilemmaWMR2019" role="doc-biblioref">Wildi et McElroy</a> (<a href="#ref-trilemmaWMR2019" role="doc-biblioref">2019</a>)</span>.
+<span class="math inline">\(X_g\)</span> critères provenant de <span class="citation">Grun-Rehomme, Guggemos, et Ladiray (<a href="#ref-ch15HBSA" role="doc-biblioref">2018</a>)</span> et <span class="math inline">\(X_w\)</span> critères provenant de <span class="citation">Wildi et McElroy (<a href="#ref-trilemmaWMR2019" role="doc-biblioref">2019</a>)</span>.
 </p>
 <p class="caption">
 <span class="math inline">\(\rho_s\)</span> et <span class="math inline">\(\varphi_s\)</span> représentent le gain et la fonction de déphasage du filtre symétrique d’Henderson.
@@ -554,7 +553,7 @@ Residual (Wildi)
 </div>
 </div>
 </div>
-<h3>Références</h3>
+<h3>Références<a href="références.html#références" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-deforest1877adjustment" class="csl-entry">
 De Forest, Erastus L. 1877. <span>« On adjustment formulas »</span>. <em>The Analyst</em> 4 (3): 79‑86.
@@ -578,9 +577,9 @@ Wildi, Marc, et Bernd Schips. 2004. <span>« <span>Signal Extraction: How (In)e
 <li id="fn8"><p>
 La fonction de transfert peut être définie de manière équivalente par <span class="math inline">\(\Gamma_\theta(\omega)=\sum_{k=-p}^{+f} \theta_k e^{i \omega k}\)</span> ou <span class="math inline">\(\Gamma_\theta(\omega)=\sum_{k=-p}^{+f} \theta_k e^{2\pi i \omega k}\)</span>.<a href="sec-propMM.html#fnref8" class="footnote-back">↩︎</a></p></li>
 <li id="fn9"><p>
-Cette fonction est parfois définie comme <span class="math inline">\(\phi_\theta(\omega)=\frac{\Phi_\theta(\omega)}{\omega}\)</span> pour mesurer le déphasage en termes de période.<a href="sec-propMM.html#fnref9" class="footnote-back">↩︎</a></p></li>
+Cette fonction est parfois définie comme <span class="math inline">\(\phi_\theta(\omega)=\frac{\varphi_\theta(\omega)}{\omega}\)</span> pour mesurer le déphasage en termes de période.<a href="sec-propMM.html#fnref9" class="footnote-back">↩︎</a></p></li>
 <li id="fn10"><p>
-Lorsque <span class="math inline">\(\Phi_\theta(\omega)/\omega&gt;0\)</span> le déphasage est positif : le point de retournement est détecté avec retard.<a href="sec-propMM.html#fnref10" class="footnote-back">↩︎</a></p></li>
+Lorsque <span class="math inline">\(\varphi_\theta(\omega)/\omega&gt;0\)</span> le déphasage est positif : le point de retournement est détecté avec retard.<a href="sec-propMM.html#fnref10" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -631,7 +630,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["AQLT_JMS_2022.pdf", "AQLT_JMS_2022.docx", "AQLT_JMS_2022.tex"],
+"download": ["S27_2_ACTE_QUARTIERLATENTE_JMS2022.pdf", "S27_2_ACTE_QUARTIERLATENTE_JMS2022.docx", "S27_2_ACTE_QUARTIERLATENTE_JMS2022.tex"],
 "search": {
 "engine": "fuse",
 "options": null

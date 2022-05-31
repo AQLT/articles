@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Estimation en temps réel de la tendance-cycle : apport de l’utilisation des filtres asymétriques dans la détection des points de retournement</title>
   <meta name="description" content="Journées de méthodologie statistique de l’Insee (JMS) / Mars 2022 / PARIS" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Estimation en temps réel de la tendance-cycle : apport de l’utilisation des filtres asymétriques dans la détection des points de retournement" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="Journées de méthodologie statistique de l’Insee (JMS) / Mars 2022 / PARIS" />
   
@@ -24,7 +23,7 @@
 <meta name="author" content="Alain Quartier-la-Tente" />
 
 
-<meta name="date" content="2022-03-17" />
+<meta name="date" content="2022-05-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +32,6 @@
   
 
 <link rel="next" href="abstract.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <link href="libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
@@ -96,7 +95,7 @@ div.csl-indent {
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">JMS 2022</a></li>
+<li><a href="./">JMS 2022 AQLT</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Résumé</a></li>
@@ -263,10 +262,10 @@ div.csl-indent {
 <div id="header">
 <h1 class="title">Estimation en temps réel de la tendance-cycle : apport de l’utilisation des filtres asymétriques dans la détection des points de retournement</h1>
 <p class="author"><em>Alain Quartier-la-Tente</em></p>
-<p class="date"><em>2022-03-17</em></p>
+<p class="date"><em>2022-05-31</em></p>
 </div>
-<div id="résumé" class="section level1 unnumbered">
-<h1>Résumé</h1>
+<div id="résumé" class="section level1 unnumbered hasAnchor">
+<h1>Résumé<a href="index.html#résumé" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div class="abstract">
 <div class="title">
 <p>Résumé</p>
@@ -276,18 +275,18 @@ Les moyennes mobiles, ou les filtres linéaires, sont omniprésents dans les mé
 Au centre de la série, des moyennes mobiles symétriques sont appliquées<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.
 Cependant, en raison du manque d’observations futures, les estimations en temps réel doivent s’appuyer sur des moyennes mobiles asymétriques.
 C’est ce qui est par exemple fait dans les méthodes de désaisonnalisation les plus utilisées, TRAMO-SEATS et X-13ARIMA, qui prolongent la série sur 1 an par un modèle ARIMA.
-Les prévisions étant des combinaisons linéaires du passé, cela revient en réalité à utiliser des moyennes mobiles asymétriques dont les coefficients sont optimisés par rapport à la prévision avec une longueur d’avance — <em>one-step ahead forecasting</em>.</p>
+Les prévisions étant des combinaisons linéaires du passé, cela revient en réalité à utiliser des moyennes mobiles asymétriques dont les coefficients sont optimisés par rapport à la prévision avec une longueur d’avance.</p>
 <p>La construction de moyennes mobiles asymétriques performantes en termes de fidélité (préservation du signal), de révision, de lissage et de déphasage (délais dans la détection de points de retournement) est un sujet de recherche toujours ouvert.
-Cette étude décrit et compare des approches récentes pour la construction de moyennes mobiles asymétriques, utilisées pour l’estimation en temps réel de la tendance-cycle : filtres polynomiaux locaux <span class="citation">(<a href="#ref-proietti2008" role="doc-biblioref">Proietti et Luati 2008</a>; <a href="#ref-GrayThomson1996" role="doc-biblioref">Gray et Thomson 1996</a>)</span> ; méthodes basées sur une optimisation sous contrainte d’une somme pondérée de critères de qualité des moyennes mobiles <span class="citation">(<a href="#ref-ch15HBSA" role="doc-biblioref">Grun-Rehomme, Guggemos, et Ladiray 2018</a>; <a href="#ref-trilemmaWMR2019" role="doc-biblioref">Wildi et McElroy 2019</a>)</span> ; et filtres basés sur les espaces de Hilbert à noyau reproduisant (RKHS) <span class="citation"><a href="#ref-dagumbianconcini2008" role="doc-biblioref">Dagum et Bianconcini</a> (<a href="#ref-dagumbianconcini2008" role="doc-biblioref">2008</a>)</span>.
+Cette étude décrit et compare des approches récentes pour la construction de moyennes mobiles asymétriques, utilisées pour l’estimation en temps réel de la tendance-cycle : filtres polynomiaux locaux <span class="citation">(<a href="#ref-proietti2008" role="doc-biblioref">Proietti et Luati 2008</a>; <a href="#ref-GrayThomson1996" role="doc-biblioref">Gray et Thomson 1996</a>)</span> ; méthodes basées sur une optimisation sous contrainte d’une somme pondérée de critères de qualité des moyennes mobiles <span class="citation">(<a href="#ref-ch15HBSA" role="doc-biblioref">Grun-Rehomme, Guggemos, et Ladiray 2018</a>; <a href="#ref-trilemmaWMR2019" role="doc-biblioref">Wildi et McElroy 2019</a>)</span> ; et filtres basés sur les espaces de Hilbert à noyau reproduisant (RKHS) <span class="citation">Dagum et Bianconcini (<a href="#ref-dagumbianconcini2008" role="doc-biblioref">2008</a>)</span>.
 Elle montre également comment les filtres polynomiaux locaux peuvent être étendus pour inclure un critère de temporalité afin de minimiser le déphasage.
 Enfin, cette étude montre qu’il est possible d’établir une approche unificatrice générale qui permet de reproduire l’ensemble des méthodes étudiées.</p>
 <p>La comparaison des méthodes sur séries simulées montre qu’il est important d’adapter la longueur du filtre à la variabilité de la série.
-Par ailleurs, même si certains filtres RKHS sont sujet à des problèmes d’optimisation et conduisent à des estimations intermédiaires erratiques, d’autres semblent donner des résultats satisfaisant en termes de délais dans la détection des points de retournement et de révisions.
-De plus, lorsque la longueur du filtre est adapté à la variabilité de la série, chercher à conserver des tendances polynomiales de degré supérieur à un semble introduire de la variance dans les estimations (et donc plus de révisions) sans gain significatif en termes de détection de point de retournement.</p>
+Même si certains filtres RKHS pourraient donner des résultats satisfaisant en termes de délais dans la détection des points de retournement, leur utilisation doit être limitées aux premières estimations de la tendances-cycles. Lorsque l’on se rapproche de l’estimation finale (i.e., lorsque beaucoup de points dans le futur sont connus), d’autres méthodes devraient être utilisées afin de limiter les révisions. Les filtres RKHS sont par ailleurs sujets à problèmes d’optimisation.
+Enfin, lorsque la longueur du filtre est adapté à la variabilité de la série, chercher à conserver des tendances polynomiales de degré supérieur à un semble introduire de la variance dans les estimations (et donc plus de révisions) sans gain significatif en termes de détection de point de retournement.</p>
 <p>Cette étude est reproductible. En particulier, toutes les méthodes décrites sont implémentées dans le <em>package</em> <i class="fab fa-r-project"></i> <code>rjdfilters</code> (<a href="https://github.com/palatej/rjdfilters" class="uri">https://github.com/palatej/rjdfilters</a>) et tous les codes utilisées sont disponibles sous <a href="https://github.com/AQLT/articles" class="uri">https://github.com/AQLT/articles</a>.</p>
 </div>
 </div>
-<h3>Références</h3>
+<h3>Références<a href="références.html#références" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-dagumbianconcini2008" class="csl-entry">
 Dagum, Estela Bee, et Silvia Bianconcini. 2008. <span>« <span>The Henderson Smoother in Reproducing Kernel Hilbert Space</span> »</span>. <em>Journal of Business &amp; Economic Statistics</em> 26: 536‑45. <a href="https://ideas.repec.org/a/bes/jnlbes/v26y2008p536-545.html">https://ideas.repec.org/a/bes/jnlbes/v26y2008p536-545.html</a>.
@@ -360,7 +359,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["AQLT_JMS_2022.pdf", "AQLT_JMS_2022.docx", "AQLT_JMS_2022.tex"],
+"download": ["S27_2_ACTE_QUARTIERLATENTE_JMS2022.pdf", "S27_2_ACTE_QUARTIERLATENTE_JMS2022.docx", "S27_2_ACTE_QUARTIERLATENTE_JMS2022.tex"],
 "search": {
 "engine": "fuse",
 "options": null
