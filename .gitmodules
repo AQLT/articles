@@ -1,3 +1,18 @@
 [submodule "202203_jms_est_tc"]
 	path = 202203_jms_est_tc
 	url = https://github.com/AQLT/2022_JMS
+[submodule "201806_jms_regarima"]
+	path = 201806_jms_regarima
+	url = https://github.com/AQLT/2018_JMS
+[submodule "202401_dt_est_tc"]
+	path = 202401_dt_est_tc
+	url = https://github.com/InseeFrLab/DT-est-tr-tc
+[submodule "202407_dt_tvcoef"]
+	path = 202407_dt_tvcoef
+	url = https://github.com/InseeFrLab/DT-tvcoef
+[submodule "202412_joffstats"]
+	path = 202412_joffstats
+	url = https://github.com/AQLT/joffstats2024
+[submodule "202406_dt_netzero"]
+	path = 202406_dt_netzero
+	url = https://github.com/InseeFrLab/DT-way-to-net-zero
