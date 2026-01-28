@@ -16,3 +16,9 @@
 [submodule "202406_dt_netzero"]
 	path = 202406_dt_netzero
 	url = https://github.com/InseeFrLab/DT-way-to-net-zero
+[submodule "202507_robustma"]
+	path = 202507_robustma
+	url = https://github.com/AQLT/robustMA
+[submodule "202511_jms_publishtc"]
+	path = 202511_jms_publishtc
+	url = https://github.com/AQLT/publishTC.wp

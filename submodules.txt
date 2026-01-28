@@ -4,3 +4,5 @@ git submodule add https://github.com/InseeFrLab/DT-est-tr-tc 202401_dt_est_tc
 git submodule add https://github.com/InseeFrLab/DT-way-to-net-zero 202406_dt_netzero
 git submodule add https://github.com/InseeFrLab/DT-tvcoef 202407_dt_tvcoef
 git submodule add https://github.com/AQLT/joffstats2024 202412_joffstats
+git submodule add https://github.com/AQLT/robustMA 202507_robustma
+git submodule add https://github.com/AQLT/publishTC.wp 202511_jms_publishtc

@@ -1,5 +1,13 @@
 # Articles
 
+- Quartier-la-Tente A. (2025). 
+[Et si l'on publiait la tendance-cycle ?](https://aqlt.github.io/publishTC.wp/article.html). 
+15e Journées de Méthodologie Statistique.
+
+- Quartier-la-Tente, A. (2025). 
+[Estimation de la tendance-cycle avec des méthodes robustes aux points atypiques](https://aqlt.github.io/robustMA/).
+arXiv : [2507.10704 [stat.ME]](https://arxiv.org/abs/2507.10704)
+
 - Abbas R., Carnot N., Lequien M., Quartier-la-Tente A., Roux S. (2025).
 [Quel chemin vers la neutralité carbone ?](https://aqlt.github.io/articles/202501_ia.pdf)
 Insee Analyses n° 103.
